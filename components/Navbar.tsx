@@ -146,26 +146,32 @@ export default function Navbar() {
           <NavLink href="#features" label="Features" />
           <NavLink href="#how-it-works" label="How It Works" />
           <NavLink href="#pricing" label="Pricing" />
-          <NavLink href="/docs" label="Documentation" />
-          <NavLink href="/console" label="Console" />
+          <NavLink href="/docs" label="Docs" />
         </nav>
         
         {/* Desktop Auth Buttons */}
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center md:flex">
           <Link href="/console">
-            <Button variant="outline" size="sm">
-              Sign In
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="border-black bg-white text-black hover:bg-gray-100"
+            >
+              Dashboard Access
             </Button>
-          </Link>
-          <Link href="/console/signup">
-            <Button size="sm">Get Started</Button>
           </Link>
         </div>
         
         {/* Mobile Navigation Toggle */}
         <div className="flex items-center md:hidden">
-          <Link href="/console/signup" className="mr-4">
-            <Button size="sm">Get Started</Button>
+          <Link href="/console" className="mr-4">
+            <Button 
+              size="sm" 
+              variant="outline" 
+              className="border-black bg-white text-black hover:bg-gray-100"
+            >
+              Dashboard Access
+            </Button>
           </Link>
           <Button 
             variant={isMobileMenuOpen || isMenuClosing ? "default" : "outline"}
@@ -211,15 +217,14 @@ export default function Navbar() {
             <NavLink href="#features" label="Features" isMobile />
             <NavLink href="#how-it-works" label="How It Works" isMobile />
             <NavLink href="#pricing" label="Pricing" isMobile />
-            <NavLink href="/docs" label="Documentation" isMobile />
-            <NavLink href="/console" label="Console" isMobile />
+            <NavLink href="/docs" label="Docs" isMobile />
             <div className="pt-6 mt-2 border-t">
               <Link
                 href="/console"
                 className="text-lg font-medium transition-colors hover:text-primary"
                 onClick={handleCloseMobileMenu}
               >
-                Sign In
+                Dashboard Access
               </Link>
             </div>
           </nav>
