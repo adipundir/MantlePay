@@ -62,7 +62,7 @@ export default function WaitlistForm() {
     const isAlreadyExists = formState === 'already_exists';
     
     return (
-      <div className="rounded-md p-6 border border-border/30 bg-card/50 backdrop-blur-sm shadow-sm">
+      <div className="rounded-md p-4 sm:p-6 border border-border/30 bg-card/50 backdrop-blur-sm shadow-sm">
         <div className="flex flex-col items-center justify-center text-center space-y-3">
           <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,7 +85,7 @@ export default function WaitlistForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-4 mt-4">
+    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto space-y-4 mt-2 sm:mt-4">
       {formState === 'success' || formState === 'already_exists' ? (
         renderSuccessBanner()
       ) : (
@@ -100,10 +100,10 @@ export default function WaitlistForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your Name"
-              className="flex h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
+              className="flex h-10 sm:h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
-          <div className="flex flex-col gap-2">
+          <div  id="waitlist"  className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm font-medium text-left">
               Email
             </label>
@@ -113,7 +113,7 @@ export default function WaitlistForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="flex h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
+              className="flex h-10 sm:h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
               required
             />
           </div>
@@ -127,16 +127,16 @@ export default function WaitlistForm() {
               value={company}
               onChange={(e) => setCompany(e.target.value)}
               placeholder="Your Company"
-              className="flex h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
+              className="flex h-10 sm:h-12 w-full rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-primary"
             />
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-start sm:items-center space-x-2 mt-2">
             <input
               type="checkbox" 
               id="newsletter"
               checked={newsletter}
               onChange={(e) => setNewsletter(e.target.checked)}
-              className="h-4 w-4 rounded border-input bg-card text-primary focus:ring-primary"
+              className="h-4 w-4 mt-0.5 sm:mt-0 rounded border-input bg-card text-primary focus:ring-primary"
             />
             <label htmlFor="newsletter" className="text-sm text-muted-foreground">
               Subscribe to our newsletter for updates
@@ -151,14 +151,14 @@ export default function WaitlistForm() {
           
           <Button 
             type="submit" 
-            className="w-full h-12" 
+            className="w-full h-10 sm:h-12 mt-2" 
             size="lg"
             disabled={formState === 'submitting'}
           >
             {formState === 'submitting' ? 'Submitting...' : 'Join Waitlist'}
           </Button>
           
-          <p className="text-xs text-muted-foreground pt-2">
+          <p className="text-xs text-muted-foreground pt-1 sm:pt-2">
             By signing up, you agree to our <Link href="/terms" className="underline underline-offset-2 hover:text-foreground">Terms of Service</Link> and <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">Privacy Policy</Link>.
           </p>
         </>

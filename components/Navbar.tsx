@@ -1,14 +1,16 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuClosing, setIsMenuClosing] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +41,7 @@ export default function Navbar() {
   // Close mobile menu when navbar hides
   useEffect(() => {
     if (!visible && isMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
+      handleCloseMobileMenu();
     }
   }, [visible, isMobileMenuOpen]);
 
@@ -55,6 +57,75 @@ export default function Navbar() {
       document.body.style.overflow = '';
     };
   }, [isMobileMenuOpen]);
+
+  // Handle transition end to complete menu closing
+  useEffect(() => {
+    const mobileMenu = mobileMenuRef.current;
+    
+    const handleTransitionEnd = () => {
+      if (isMenuClosing) {
+        setIsMobileMenuOpen(false);
+        setIsMenuClosing(false);
+      }
+    };
+    
+    if (mobileMenu) {
+      mobileMenu.addEventListener('transitionend', handleTransitionEnd);
+      return () => {
+        mobileMenu.removeEventListener('transitionend', handleTransitionEnd);
+      };
+    }
+  }, [isMenuClosing]);
+
+  const handleCloseMobileMenu = () => {
+    setIsMenuClosing(true);
+  };
+
+  const handleOpenMobileMenu = () => {
+    setIsMobileMenuOpen(true);
+    setIsMenuClosing(false);
+  };
+
+  const toggleMobileMenu = () => {
+    if (isMobileMenuOpen || isMenuClosing) {
+      handleCloseMobileMenu();
+    } else {
+      handleOpenMobileMenu();
+    }
+  };
+
+  const NavLink = ({ href, label, isMobile = false }: { href: string; label: string; isMobile?: boolean }) => {
+    // Check if it's an anchor link
+    const isAnchor = href.startsWith('#');
+    
+    if (isAnchor) {
+      return (
+        <a 
+          href={href} 
+          className={`${isMobile 
+            ? "text-lg font-medium transition-colors hover:text-primary" 
+            : "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+          }`}
+          onClick={isMobile ? handleCloseMobileMenu : undefined}
+        >
+          {label}
+        </a>
+      );
+    }
+    
+    return (
+      <Link
+        href={href}
+        className={`${isMobile 
+          ? "text-lg font-medium transition-colors hover:text-primary" 
+          : "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        }`}
+        onClick={isMobile ? handleCloseMobileMenu : undefined}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
     <header 
@@ -72,30 +143,11 @@ export default function Navbar() {
         
         {/* Desktop Navigation */}
         <nav className="hidden gap-6 md:flex">
-          <Link
-            href="#features"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Features
-          </Link>
-          <Link
-            href="#how-it-works"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            How It Works
-          </Link>
-          <Link
-            href="/docs"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Documentation
-          </Link>
-          <Link
-            href="/console"
-            className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Console
-          </Link>
+          <NavLink href="#features" label="Features" />
+          <NavLink href="#how-it-works" label="How It Works" />
+          <NavLink href="#pricing" label="Pricing" />
+          <NavLink href="/docs" label="Documentation" />
+          <NavLink href="/console" label="Console" />
         </nav>
         
         {/* Desktop Auth Buttons */}
@@ -116,12 +168,14 @@ export default function Navbar() {
             <Button size="sm">Get Started</Button>
           </Link>
           <Button 
-            variant="outline" 
+            variant={isMobileMenuOpen || isMenuClosing ? "default" : "outline"}
             size="icon"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            onClick={toggleMobileMenu}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen || isMenuClosing}
+            className="z-[60] relative"
           >
-            {isMobileMenuOpen ? (
+            {isMobileMenuOpen || isMenuClosing ? (
               <X className="h-4 w-4" />
             ) : (
               <Menu className="h-4 w-4" />
@@ -130,47 +184,40 @@ export default function Navbar() {
         </div>
       </div>
       
+      {/* Mobile Menu Backdrop */}
+      {(isMobileMenuOpen || isMenuClosing) && (
+        <div 
+          className={`fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden transition-opacity duration-300 ${
+            isMenuClosing ? 'opacity-0' : 'opacity-100'
+          }`}
+          onClick={handleCloseMobileMenu}
+          aria-hidden="true"
+        />
+      )}
+      
       {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-50 bg-background pt-16 transition-transform duration-300 md:hidden ${
-          isMobileMenuOpen ? 'translate-y-0' : 'translate-y-full'
+        ref={mobileMenuRef}
+        className={`fixed inset-x-0 top-16 z-50 bg-background border-t transform transition-all duration-300 ease-in-out md:hidden ${
+          isMenuClosing 
+            ? 'translate-y-[-100%] opacity-0' 
+            : isMobileMenuOpen 
+              ? 'translate-y-0 opacity-100' 
+              : 'translate-y-[-100%] opacity-0 pointer-events-none'
         }`}
       >
         <div className="container py-6">
           <nav className="flex flex-col space-y-6">
-            <Link
-              href="#features"
-              className="text-lg font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Features
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-lg font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              How It Works
-            </Link>
-            <Link
-              href="/docs"
-              className="text-lg font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Documentation
-            </Link>
-            <Link
-              href="/console"
-              className="text-lg font-medium transition-colors hover:text-primary"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Console
-            </Link>
-            <div className="pt-4 border-t">
+            <NavLink href="#features" label="Features" isMobile />
+            <NavLink href="#how-it-works" label="How It Works" isMobile />
+            <NavLink href="#pricing" label="Pricing" isMobile />
+            <NavLink href="/docs" label="Documentation" isMobile />
+            <NavLink href="/console" label="Console" isMobile />
+            <div className="pt-6 mt-2 border-t">
               <Link
                 href="/console"
                 className="text-lg font-medium transition-colors hover:text-primary"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={handleCloseMobileMenu}
               >
                 Sign In
               </Link>
