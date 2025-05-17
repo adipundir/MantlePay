@@ -44,11 +44,11 @@ export default function LandingPage() {
                     Join Waitlist <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </a>
-                <Link href="/docs" className="w-full sm:w-auto">
+                {/* <Link href="/docs" className="w-full sm:w-auto">
                   <Button size="lg" variant="outline" className="w-full">
                     View Docs
                   </Button>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
@@ -121,9 +121,9 @@ export default function LandingPage() {
 
       {/* How It Works Section */}
       <section  className="w-full py-12 md:py-24 lg:py-32">
-        <div className="container px-4 sm:px-6 md:px-8">
+        <div id="how-it-works"  className="container px-4 sm:px-6 md:px-8">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div id="how-it-works" className="space-y-3">
+            <div className="space-y-3">
               <h2  className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">How It Works</h2>
               <p className="text-base text-muted-foreground max-w-[85%] mx-auto md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                 Three simple steps to start accepting crypto payments.
@@ -257,7 +257,7 @@ export default function LandingPage() {
 
       {/* Waitlist Section */}
       <section 
-        id="waitlist"
+        
         className="w-full min-h-[90vh] flex items-center justify-center py-20 md:py-28 lg:py-36 relative overflow-hidden"
       >
         {/* Background Elements */}
@@ -272,7 +272,7 @@ export default function LandingPage() {
               <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">
                 Join Our Waitlist
               </h2>
-              <p className="text-base text-muted-foreground md:text-xl/relaxed">
+              <p id="waitlist" className="text-base text-muted-foreground md:text-xl/relaxed">
                 MantlePay is currently in private beta. Sign up to get early access and be the first to know when we launch.
               </p>
             </div>

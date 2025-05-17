@@ -158,31 +158,31 @@ export default function Navbar() {
           <NavLink href="#features" label="Features" />
           <NavLink href="#how-it-works" label="How It Works" />
           <NavLink href="#pricing" label="Pricing" />
-          <NavLink href="/docs" label="Docs" />
+          {/* <NavLink href="/docs" label="Docs" /> */}
         </nav>
         
         {/* Desktop Auth Buttons */}
         <div className="hidden items-center md:flex">
-          <Link href="/console">
+          <Link href="#waitlist">
             <Button 
               size="sm" 
               variant="outline" 
               className="border-black bg-white text-black hover:bg-gray-100"
             >
-              Dashboard Access
+              Join Waitlist
             </Button>
           </Link>
         </div>
         
         {/* Mobile Navigation Toggle */}
         <div className="flex items-center md:hidden">
-          <Link href="/console" className="mr-4">
+          <Link href="#waitlist" className="mr-4">
             <Button 
               size="sm" 
               variant="outline" 
               className="border-black bg-white text-black hover:bg-gray-100"
             >
-              Dashboard Access
+              Join Waitlist
             </Button>
           </Link>
           <Button 
@@ -229,14 +229,14 @@ export default function Navbar() {
             <NavLink href="#features" label="Features" isMobile />
             <NavLink href="#how-it-works" label="How It Works" isMobile />
             <NavLink href="#pricing" label="Pricing" isMobile />
-            <NavLink href="/docs" label="Docs" isMobile />
+            {/* <NavLink href="/docs" label="Docs" isMobile /> */}
             <div className="pt-6 mt-2 border-t">
               <Link
-                href="/console"
+                href="#waitlist"
                 className="text-lg font-medium transition-colors hover:text-primary"
                 onClick={handleCloseMobileMenu}
               >
-                Dashboard Access
+                Join Waitlist
               </Link>
             </div>
           </nav>
