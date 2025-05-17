@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -11,6 +12,10 @@ export default function Navbar() {
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isDocsPage = pathname.startsWith('/docs');
+  const isConsolePage = pathname.startsWith('/console');
+  const hideOnSubpages = isDocsPage || isConsolePage;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,6 +99,11 @@ export default function Navbar() {
     }
   };
 
+  // Don't render navbar on docs or console pages
+  if (hideOnSubpages) {
+    return null;
+  }
+
   const NavLink = ({ href, label, isMobile = false }: { href: string; label: string; isMobile?: boolean }) => {
     // Check if it's an anchor link
     const isAnchor = href.startsWith('#');
@@ -134,12 +144,14 @@ export default function Navbar() {
       }`}
     >
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-            <span className="text-lg font-bold text-primary-foreground">M</span>
-          </div>
-          <span className="text-lg font-semibold">MantlePay</span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
+              <span className="text-lg font-bold text-primary-foreground">M</span>
+            </div>
+            <span className="text-lg font-semibold">MantlePay</span>
+          </Link>
+        </div>
         
         {/* Desktop Navigation */}
         <nav className="hidden gap-6 md:flex">

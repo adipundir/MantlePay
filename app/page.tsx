@@ -4,10 +4,11 @@ import { ArrowRight, Code, Globe, Webhook, LayoutDashboard, DollarSign, PiggyBan
 
 import { Button } from "@/components/ui/button"
 import WaitlistForm from "@/components/WaitlistForm"
+import Footer from "@/components/Footer"
 
 export default function LandingPage() {
   return (
-    <main className="overflow-x-hidden">
+    <main className="overflow-x-hidden pt-16">
       {/* Hero Section */}
       <section className="w-full min-h-[calc(100vh-4rem)] flex items-center py-10 md:py-20 lg:py-0">
         <div className="container px-4 sm:px-6 md:px-8">
@@ -256,6 +257,7 @@ export default function LandingPage() {
 
       {/* Waitlist Section */}
       <section 
+        id="waitlist"
         className="w-full min-h-[90vh] flex items-center justify-center py-20 md:py-28 lg:py-36 relative overflow-hidden"
       >
         {/* Background Elements */}
@@ -267,27 +269,21 @@ export default function LandingPage() {
         <div className="container relative z-10 px-4 sm:px-6 md:px-8">
           <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-3xl mx-auto">
             <div className="space-y-4">
-              {/* <div className="bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium inline-block mb-2">
-                Limited Early Access
-              </div> */}
               <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">
                 Join Our Waitlist
               </h2>
-              <p  id="waitlist" className="text-base text-muted-foreground md:text-xl/relaxed">
+              <p className="text-base text-muted-foreground md:text-xl/relaxed">
                 MantlePay is currently in private beta. Sign up to get early access and be the first to know when we launch.
               </p>
             </div>
             <div className="w-full bg-card border border-border/60 rounded-xl shadow-lg p-4 sm:p-6 md:p-8">
               <WaitlistForm />
             </div>
-            {/* <div  className="flex flex-col items-center justify-center space-y-4 text-center max-w-3xl mx-auto">
-              <p className="text-base text-muted-foreground md:text-xl/relaxed">
-                No spam, just updates that matter. Promise! ✨
-              </p>
-            </div> */}
           </div>
         </div>
       </section>
+      
+      <Footer />
     </main>
   )
 }

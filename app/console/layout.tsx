@@ -22,16 +22,19 @@ export default function ConsoleLayout({
   children: React.ReactNode
 }) {
   return (
-    <SidebarProvider defaultOpen={true}>
-      <div className="flex min-h-screen flex-col">
-        <header className="sticky top-0 z-50 flex h-14 items-center gap-4 border-b bg-background px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
-              <span className="text-lg font-bold text-primary-foreground">M</span>
-            </div>
-            <span className="text-lg font-semibold">MantlePay</span>
-          </Link>
-          <div className="ml-auto flex items-center gap-2">
+    <div className="flex min-h-screen min-w-screen flex-col">
+      {/* Custom Navbar for Console */}
+      <header className="fixed top-0 left-0 right-0 z-50 w-full flex h-14 items-center border-b bg-background px-4 sm:px-6">
+        <div className="flex w-full items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
+                <span className="text-lg font-bold text-primary-foreground">M</span>
+              </div>
+              <span className="text-lg font-semibold">MantlePay</span>
+            </Link>
+          </div>
+          <div className="flex items-center gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-2">
@@ -55,9 +58,12 @@ export default function ConsoleLayout({
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
-        </header>
-        <div className="flex flex-1">
-          <Sidebar>
+        </div>
+      </header>
+      
+      <div className="flex flex-1 mt-14 gap-0">
+        <SidebarProvider defaultOpen={true}>
+          <Sidebar className="border-r fixed left-0 top-14 h-[calc(100vh-3.5rem)]">
             <SidebarHeader>
               <div className="flex items-center gap-2 px-2 py-1.5">
                 <span className="text-sm font-medium">Developer Console</span>
@@ -131,11 +137,13 @@ export default function ConsoleLayout({
               </SidebarMenu>
             </SidebarFooter>
           </Sidebar>
-          <div className="flex-1 overflow-auto">
-            <div className="container py-6 px-4 md:py-8 lg:py-10 md:px-8">{children}</div>
+          <div className="flex-1">
+            <div className="max-w-5xl px-10 py-8 w-full">
+              {children}
+            </div>
           </div>
-        </div>
+        </SidebarProvider>
       </div>
-    </SidebarProvider>
+    </div>
   )
 }
