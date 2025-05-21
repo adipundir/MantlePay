@@ -44,11 +44,88 @@ export default function LandingPage() {
                     Join Waitlist <ArrowRight className="h-4 w-4 ml-1" />
                   </Button>
                 </a>
-                {/* <Link href="/docs" className="w-full sm:w-auto">
+                <Link href="/checkout" className="w-full sm:w-auto">
                   <Button size="lg" variant="outline" className="w-full">
-                    View Docs
+                    Try Demo Checkout
                   </Button>
-                </Link> */}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50">
+        <div className="container px-4 sm:px-6 md:px-8">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-3">
+              <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">
+                See MantlePay in Action
+              </h2>
+              <p className="text-base text-muted-foreground max-w-[85%] mx-auto md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
+                Experience our seamless crypto checkout process with our interactive demo
+              </p>
+            </div>
+          </div>
+          
+          <div className="mx-auto max-w-5xl mt-10">
+            <div className="bg-card border border-border/40 rounded-xl shadow-lg overflow-hidden">
+              <div className="grid md:grid-cols-5 gap-6">
+                <div className="md:col-span-3 p-6 md:p-8 flex flex-col justify-center">
+                  <div className="space-y-4">
+                    <h3 className="text-2xl font-bold">Stripe-Like Experience for Crypto</h3>
+                    <p className="text-muted-foreground">
+                      MantlePay offers a familiar checkout experience similar to Stripe, but for cryptocurrency payments. 
+                      Our solution makes it easy for traditional businesses to accept crypto without any technical complexity.
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex items-start gap-2">
+                        <div className="rounded-full bg-primary/10 p-1 mt-0.5">
+                          <svg className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                        <span className="text-sm">User-friendly checkout flow</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="rounded-full bg-primary/10 p-1 mt-0.5">
+                          <svg className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                        <span className="text-sm">Multiple wallet integrations</span>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <div className="rounded-full bg-primary/10 p-1 mt-0.5">
+                          <svg className="h-3 w-3 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                        <span className="text-sm">Real-time payment tracking</span>
+                      </div>
+                    </div>
+                    <div className="pt-2">
+                      <Link href="/checkout">
+                        <Button size="lg">
+                          Try Demo Checkout
+                          <ArrowRight className="ml-1 h-4 w-4" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="md:col-span-2 bg-gradient-to-br from-primary/5 to-primary/10 p-6 md:p-8 flex items-center justify-center">
+                  <div className="w-full max-w-xs overflow-hidden rounded-xl border border-border/40 shadow-lg">
+                    <Image
+                      src="/placeholder.svg?height=500&width=300"
+                      width={300}
+                      height={500}
+                      alt="MantlePay Checkout Preview"
+                      className="w-full h-auto"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -56,7 +133,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section className="w-full py-12 md:py-24 lg:py-32 bg-muted/50">
+      <section className="w-full py-12 md:py-24 lg:py-32">
         <div className="container px-4 sm:px-6 md:px-8">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-3">
@@ -266,9 +343,9 @@ export default function LandingPage() {
         <div className="absolute -bottom-8 -left-8 h-64 w-64 rounded-full bg-primary/5 blur-3xl"></div>
         <div className="absolute -top-8 -right-8 h-64 w-64 rounded-full bg-primary/5 blur-3xl"></div>
         
-        <div className="container relative z-10 px-4 sm:px-6 md:px-8">
+        <div  className="container relative z-10 px-4 sm:px-6 md:px-8">
           <div className="flex flex-col items-center justify-center space-y-8 text-center max-w-3xl mx-auto">
-            <div className="space-y-4">
+            <div  className="space-y-4">
               <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl lg:text-5xl">
                 Join Our Waitlist
               </h2>
